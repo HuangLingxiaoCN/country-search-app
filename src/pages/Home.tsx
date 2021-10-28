@@ -1,41 +1,67 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import React, { useCallback } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { Product, AppState } from '../types'
-import { addProduct, removeProduct } from '../redux/actions'
+import { AppState } from '../types'
+import Table from '../components/Table/Table'
+import Header from '../components/Header/Header'
 
-const names = ['Apple', 'Orange', 'Avocado', 'Banana', 'Cucumber', 'Carrot']
+import { fetchCountries } from '../redux/actions/countryAction'
+
+const tableHeader = ['Flag', 'Name', 'Population', 'Language', 'Region']
+
+const countryImg = {
+  width: '5rem',
+}
+
+function setCountryData(data: any) {
+  const countryData: any = []
+
+  data.forEach((country: any) => {
+    countryData.push({
+      flag: (
+        <img
+          src={country.flags.svg}
+          alt={country.name.official}
+          style={countryImg}
+        />
+      ),
+      name: country.name.official,
+      population: country.population,
+      language: country.languages
+        ? Object.values(country.languages).map((lan: any) => (
+          <li key={lan}>{lan}</li>
+        ))
+        : '',
+      region: country.continents[0],
+    })
+  })
+
+  return countryData;
+}
 
 export default function Home() {
+  const [search, setSearch] = useState('')
   const dispatch = useDispatch()
-  const products = useSelector((state: AppState) => state.product.inCart)
+  const data = useSelector((state: AppState) => state.country.countries)
 
-  const handleAddProduct = () => {
-    const product: Product = {
-      id: (+new Date()).toString(),
-      name: names[Math.floor(Math.random() * names.length)],
-      price: +(Math.random() * 10).toFixed(2),
-    }
-    dispatch(addProduct(product))
-  }
+  useEffect(() => {
+    dispatch(fetchCountries())
+  }, [dispatch])
+  const countryData = setCountryData(data)
+
+  const setSearchHandler = useCallback((countryName) => {
+    setSearch(countryName)
+  }, [])
+
+  const filteredCountries = countryData.filter((country: any) => {
+    return country.name.toLowerCase().includes(search.toLowerCase())
+  })
 
   return (
     <>
-      <h1>Home page</h1>
-      {products.length <= 0 && <div>No products in cart</div>}
-      <ul>
-        {products.map((p) => (
-          <li key={p.id}>
-            <Link to={`/products/${p.id}`}>{`${p.name} - $${p.price}`}</Link>
-
-            {'  '}
-
-            <button onClick={() => dispatch(removeProduct(p))}>Remove</button>
-          </li>
-        ))}
-      </ul>
-      <button onClick={handleAddProduct}>Add product</button>
+      <Header onSearch={setSearchHandler} />
+      <Table tableHeader={tableHeader} tableData={filteredCountries} />
     </>
   )
 }
