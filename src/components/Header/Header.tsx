@@ -6,7 +6,7 @@ import HeaderCartButton from './HeaderCartButton'
 
 function Header({ onSearch }: { onSearch: any }) {
   return (
-    <header>
+    <header className={styles.header}>
       <h1>All Country</h1>
       <SearchBar onSearch={onSearch} />
       <HeaderCartButton />

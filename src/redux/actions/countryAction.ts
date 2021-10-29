@@ -1,11 +1,18 @@
 import { Dispatch } from 'redux'
 
-import { FETCH_COUNTRIES_REQUEST, Country } from "../../types";
+import { FETCH_COUNTRIES_REQUEST, ADD_COUNTRY, Country } from "../../types";
 
 export const fetchCountriesRequest = (countries: Country) => {
   return { 
     type: FETCH_COUNTRIES_REQUEST,
     payload: countries
+  }
+}
+
+export const addCountry = (countryName: string) => {
+  return {
+    type: ADD_COUNTRY,
+    payload: countryName
   }
 }
 

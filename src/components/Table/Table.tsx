@@ -1,9 +1,11 @@
 import React, { ReactElement } from 'react'
+
 import TableTr from './TableTr'
+import styles from './Table.module.css'
 
 function Table(props: any) {
   return (
-    <div>
+    <div className={styles.divContainer}>
       <table>
         <thead>
           <tr>

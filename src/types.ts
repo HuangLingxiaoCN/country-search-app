@@ -23,40 +23,51 @@ export type Country = {
 } | any
 
 
-// A product
-export type Product = {
-  id: string
-  name: string
-  price: number
-}
-
-export type AddProductAction = {
-  type: typeof ADD_PRODUCT
+export type AddCountryAction = {
+  type: typeof ADD_COUNTRY
   payload: {
-    product: Product
+    country: Country
   }
 }
 
-export type RemoveProductAction = {
-  type: typeof REMOVE_PRODUCT
-  payload: {
-    product: Product
-  }
-}
+// // A product
+// export type Product = {
+//   id: string
+//   name: string
+//   price: number
+// }
+
+// export type AddProductAction = {
+//   type: typeof ADD_PRODUCT
+//   payload: {
+//     product: Product
+//   }
+// }
+
+// export type RemoveProductAction = {
+//   type: typeof REMOVE_PRODUCT
+//   payload: {
+//     product: Product
+//   }
+// }
 
 // Use this union in reducer
-export type ProductActions = AddProductAction | RemoveProductAction
+// export type ProductActions = AddProductAction | RemoveProductAction
 
-export type ProductState = {
-  inCart: Product[]
-}
+export type CountryActions = AddCountryAction
+
+// export type ProductState = {
+//   inCart: Product[]
+// }
 
 export type CountryState = {
   countries: Country[]
+  countriesInCartAmount: number,
+  countriesInCart: Country[]
 }
 
 export type AppState = {
-  product: ProductState
+  // product: ProductState
   country: CountryState
 }
 

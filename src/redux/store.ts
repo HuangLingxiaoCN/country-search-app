@@ -6,12 +6,11 @@ import { AppState } from '../types'
 import createRootReducer from './reducers'
 // import rootSaga from './sagas'
 
-const initState: AppState = {
-  product: {
-    inCart: [],
-  },
+const initState: any = {
   country: {
-    countries: []
+    countries: [],
+    countriesInCartAmount: 0,
+    countriesInCart: []
   }
 }
 
