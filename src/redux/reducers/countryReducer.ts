@@ -1,10 +1,15 @@
 /* eslint-disable indent */
-import { FETCH_COUNTRIES_REQUEST, ADD_COUNTRY } from '../../types'
+import {
+  FETCH_COUNTRIES_REQUEST,
+  ADD_COUNTRY,
+  REMOVE_COUNTRY,
+  CountryState,
+} from '../../types'
 
-const initialState = {
+const initialState: CountryState = {
   countries: [],
-  countriesInCartAmount: 0,
-  countriesInCart: []
+  countriesInFavoriteAmount: 0,
+  countriesInFavorite: [],
 }
 
 const countryReducer = (state = initialState, action: any) => {
@@ -16,15 +21,31 @@ const countryReducer = (state = initialState, action: any) => {
       }
 
     case ADD_COUNTRY:
-      // Add a country to cart
+      // Add a country to Favorite
+      const addedCountry = state.countries.find(
+        (country) => country.name.official === action.payload
+      )
       return {
         ...state,
-        countriesInCartAmount: state.countriesInCartAmount + 1
+        countriesInFavoriteAmount: state.countriesInFavoriteAmount + 1,
+        countriesInFavorite: [...state.countriesInFavorite, addedCountry],
       }
-    
+
+    case REMOVE_COUNTRY:
+      const removedCountry = state.countries.find(
+        (country) => country.name.official === action.payload
+      )
+      return {
+        ...state,
+        countriesInFavoriteAmount: state.countriesInFavoriteAmount - 1,
+        countriesInFavorite: state.countriesInFavorite.filter(
+          (country) => country.name.official !== removedCountry.name.official
+        ),
+      }
+
     default:
       return state
   }
 }
 
-export default countryReducer;
+export default countryReducer
