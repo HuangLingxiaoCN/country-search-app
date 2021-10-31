@@ -1,11 +1,10 @@
-import React, { useCallback } from 'react'
-import { useState, useEffect } from 'react'
+import React, { useCallback, useState, useEffect, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { AppState } from '../types'
 import Table from '../components/Table/Table'
 import Header from '../components/Header/Header'
-
+import { ThemeContext } from '../context/themeContext'
 import { fetchCountries } from '../redux/actions/countryAction'
 
 const tableHeader = ['Flag', 'Name', 'Population', 'Language', 'Region']
@@ -37,12 +36,13 @@ function setCountryData(data: any) {
     })
   })
 
-  return countryData;
+  return countryData
 }
 
 export default function Home() {
   const [search, setSearch] = useState('')
   const dispatch = useDispatch()
+  const themeCtx = useContext(ThemeContext)
   const data = useSelector((state: AppState) => state.country.countries)
 
   useEffect(() => {
@@ -61,7 +61,12 @@ export default function Home() {
   return (
     <>
       <Header onSearch={setSearchHandler} />
-      <Table tableHeader={tableHeader} tableData={filteredCountries} />
+      <div>
+        <button onClick={() => themeCtx.setBlueTheme()}>Blue Theme</button>
+        <button onClick={() => themeCtx.setGreenTheme()}>Green Theme</button>
+        <button onClick={() => themeCtx.setRedTheme()}>Red Theme</button>
+        <Table tableHeader={tableHeader} tableData={filteredCountries} />
+      </div>
     </>
   )
 }
