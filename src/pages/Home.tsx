@@ -1,8 +1,9 @@
 import React, { useCallback, useState, useEffect, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import Button from 'react-bootstrap/Button'
 
 import { AppState } from '../types'
-import Table from '../components/Table/Table'
+import TableComponent from '../components/Table/TableComponent'
 import Header from '../components/Header/Header'
 import { ThemeContext } from '../context/themeContext'
 import { fetchCountries } from '../redux/actions/countryAction'
@@ -50,7 +51,7 @@ export default function Home() {
   }, [dispatch])
   const countryData = setCountryData(data)
 
-  const setSearchHandler = useCallback((countryName) => {
+  const setSearchHandler = useCallback((countryName: string) => {
     setSearch(countryName)
   }, [])
 
@@ -62,10 +63,19 @@ export default function Home() {
     <>
       <Header onSearch={setSearchHandler} />
       <div>
-        <button onClick={() => themeCtx.setBlueTheme()}>Blue Theme</button>
-        <button onClick={() => themeCtx.setGreenTheme()}>Green Theme</button>
-        <button onClick={() => themeCtx.setRedTheme()}>Red Theme</button>
-        <Table tableHeader={tableHeader} tableData={filteredCountries} />
+        <Button variant="primary" onClick={() => themeCtx.setBlueTheme()}>
+          Blue Theme
+        </Button>
+        <Button variant="success" onClick={() => themeCtx.setGreenTheme()}>
+          Green Theme
+        </Button>
+        <Button variant="danger" onClick={() => themeCtx.setRedTheme()}>
+          Red Theme
+        </Button>
+        <TableComponent
+          tableHeader={tableHeader}
+          tableData={filteredCountries}
+        />
       </div>
     </>
   )

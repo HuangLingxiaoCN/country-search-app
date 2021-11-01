@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 import { addCountry } from '../../redux/actions/countryAction'
 import styles from './TableTr.module.css'
@@ -24,9 +25,9 @@ function TableTd(props: any) {
       <td>{props.language}</td>
       <td>{props.region}</td>
       <td>
-        <button onClick={clickHandler} disabled={buttonClick}>
+        <Button onClick={clickHandler} disabled={buttonClick}>
           Add
-        </button>
+        </Button>
       </td>
     </tr>
   )

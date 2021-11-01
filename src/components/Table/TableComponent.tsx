@@ -1,12 +1,13 @@
 import React, { ReactElement } from 'react'
+import Table from 'react-bootstrap/Table'
 
 import TableTr from './TableTr'
 import styles from './Table.module.css'
 
-function Table(props: any) {
+function TableComponent(props: any) {
   return (
     <div className={styles.divContainer}>
-      <table>
+      <Table striped bordered hover>
         <thead>
           <tr>
             {props.tableHeader.map((header: ReactElement) => (
@@ -28,9 +29,9 @@ function Table(props: any) {
             )
           })}
         </tbody>
-      </table>
+      </Table>
     </div>
   )
 }
 
-export default Table
+export default TableComponent

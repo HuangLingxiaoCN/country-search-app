@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 import { AppState } from '../../types'
 
@@ -10,12 +11,11 @@ function HeaderCartButton() {
   )
 
   return (
-    <button>
+    <Button variant="secondary">
       <Link to="/favorite">
-        <span>Your Favorite</span>
-        <span>{amountInCart}</span>
+        <span>Your Favorite - {amountInCart}</span>
       </Link>
-    </button>
+    </Button>
   )
 }
 
