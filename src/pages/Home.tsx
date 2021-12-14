@@ -43,7 +43,7 @@ function setCountryData(data: any) {
 export default function Home() {
   const [search, setSearch] = useState('')
   const dispatch = useDispatch()
-  const themeCtx = useContext(ThemeContext)
+  const { setBlueTheme, setGreenTheme, setRedTheme } = useContext(ThemeContext)
   const data = useSelector((state: AppState) => state.country.countries)
 
   useEffect(() => {
@@ -63,13 +63,13 @@ export default function Home() {
     <>
       <Header onSearch={setSearchHandler} />
       <div>
-        <Button variant="primary" onClick={() => themeCtx.setBlueTheme()}>
+        <Button variant="primary" onClick={() => setBlueTheme()}>
           Blue Theme
         </Button>
-        <Button variant="success" onClick={() => themeCtx.setGreenTheme()}>
+        <Button variant="success" onClick={() => setGreenTheme()}>
           Green Theme
         </Button>
-        <Button variant="danger" onClick={() => themeCtx.setRedTheme()}>
+        <Button variant="danger" onClick={() => setRedTheme()}>
           Red Theme
         </Button>
         <TableComponent

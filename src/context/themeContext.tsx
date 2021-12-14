@@ -19,25 +19,13 @@ export const ThemeContext = createContext(initialContext)
 export const ContextProvider = (props: any) => {
   const [theme, setTheme] = useState(themeContextValue.blueTheme)
 
-  const setBlueTheme = () => {
-    setTheme(themeContextValue.blueTheme)
-  }
-
-  const setGreenTheme = () => {
-    setTheme(themeContextValue.greenTheme)
-  }
-
-  const setRedTheme = () => {
-    setTheme(themeContextValue.redTheme)
-  }
-
   return (
     <ThemeContext.Provider
       value={{
         themeColor: theme,
-        setBlueTheme: setBlueTheme,
-        setGreenTheme: setGreenTheme,
-        setRedTheme: setRedTheme,
+        setBlueTheme: () => setTheme(themeContextValue.blueTheme),
+        setGreenTheme: () => setTheme(themeContextValue.greenTheme),
+        setRedTheme: () => setTheme(themeContextValue.redTheme),
       }}
     >
       {props.children}

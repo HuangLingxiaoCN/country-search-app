@@ -36,21 +36,6 @@ function Favorite() {
               </Button>
             </span>
           </ListGroup.Item>
-          // <li key={country.name.official}>
-          //   <img
-          //     src={country.flags.svg}
-          //     alt={country.name.common}
-          //     style={countryImg}
-          //   />
-          //   <span>{country.name.official}</span>
-          //   <span>
-          //     <button
-          //       onClick={() => dispatch(removeCountry(country.name.official))}
-          //     >
-          //       Remove
-          //     </button>
-          //   </span>
-          // </li>
         ))}
       </ListGroup>
       <Button variant="link">
